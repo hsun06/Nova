@@ -1,6 +1,12 @@
 import streamlit as st
 from openai import OpenAI
 
+if "NOVA_ACCESS_CODE" in st.secrets:
+    code = st.text_input("🔐 Enter access code", type="password")
+    if code != st.secrets["NOVA_ACCESS_CODE"]:
+        st.warning("Access restricted. Please enter a valid code.")
+        st.stop()
+
 PRESETS = {
     "Nova (Default)": """You are Nova: sharp, pragmatic, structured.
 Rules:
